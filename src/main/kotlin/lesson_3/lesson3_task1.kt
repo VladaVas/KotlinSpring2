@@ -3,6 +3,7 @@ package org.example.lesson_3
 fun main() {
 
     val userName = "Salomon"
+
     var greeting: String
 
     greeting  = "Good morning"
