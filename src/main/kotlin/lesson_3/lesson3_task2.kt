@@ -3,13 +3,11 @@ package org.example.lesson_3
 fun main() {
     val firstName = "Татьяна"
 
-    var lastName: String
-    lastName = "Андреева"
+    var lastName = "Андреева"
 
     val middleName = "Сергеевна"
 
-    var age: Int
-    age = 20
+    var age = 20
 
     println("ФИО: $lastName $firstName $middleName, возраст: $age")
 
