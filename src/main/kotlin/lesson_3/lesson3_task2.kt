@@ -12,7 +12,9 @@ fun main() {
 
     println("ФИО: $lastName $firstName $middleName, возраст: $age")
 
-    lastName  = "Сидорова"
+    lastName = "Сидорова"
     age = 22
 
     println("ФИО: $lastName $firstName $middleName, возраст: $age")
+
+}
