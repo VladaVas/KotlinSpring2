@@ -7,8 +7,8 @@ fun main() {
 
     println(
         """
-        Упражнения для рук:       $isArmAbsDay
-        Упражнения для ног:       ${!isArmAbsDay}
+        Упражнения для рук:      $isArmAbsDay
+        Упражнения для ног:      ${!isArmAbsDay}
         Упражнения для спины:  ${!isArmAbsDay}
         Упражнения для пресса: $isArmAbsDay
         """.trimIndent()
