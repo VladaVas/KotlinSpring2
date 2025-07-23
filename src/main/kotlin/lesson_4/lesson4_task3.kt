@@ -7,8 +7,8 @@ const val CURRENT_SEASON = "зима"
 
 fun main() {
 
-    val isFavorable = SUNNY_WEATHER &&
-            IS_TENT_OPEN &&
+    val isFavorable = SUNNY_WEATHER == true &&
+            IS_TENT_OPEN == true &&
             HUMIDITY == 20 &&
             CURRENT_SEASON != "зима"
 
