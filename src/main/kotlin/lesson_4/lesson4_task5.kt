@@ -1,19 +1,25 @@
 package org.example.lesson_4
 
-const val IS_DAMAGED = false
-const val CREW_COUNT = 60
-const val PROVISIONS = 55
-const val IS_WEATHER_FAVORABLE = true
+const val MIN_CREW = 55
+const val MAX_CREW = 70
+const val MIN_PROVISIONS_MAIN = 50
+const val MIN_PROVISIONS_ALT = 50
+const val RECOMMENDED_CREW = 70
 
 fun main() {
+    val isDamaged = false
+    val crewCount = 60
+    val provisions = 55
+    val isWeatherFavorable = true
 
-    val canDepart = (!IS_DAMAGED == true &&
-            CREW_COUNT in 55..70 &&
-            PROVISIONS > 50) ||
-            (IS_DAMAGED &&
-                    CREW_COUNT == 70 &&
-                    IS_WEATHER_FAVORABLE == true &&
-                    PROVISIONS >= 50)
+    val canDepart =
+        (!isDamaged &&
+                crewCount in MIN_CREW..MAX_CREW &&
+                provisions > MIN_PROVISIONS_MAIN) ||
+                (isDamaged &&
+                        crewCount == RECOMMENDED_CREW &&
+                        isWeatherFavorable &&
+                        provisions >= MIN_PROVISIONS_ALT)
 
     println("Корабль может отправиться в плавание: $canDepart")
-}
+}}
