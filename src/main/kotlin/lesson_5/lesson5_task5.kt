@@ -1,12 +1,10 @@
 package org.example.lesson_5
 
-import kotlin.random.Random
-
 fun main () {
 
-    val win1 = Random.nextInt(0, 43)
-    val win2 = Random.nextInt(0, 43)
-    val win3 = Random.nextInt(0, 43)
+    val win1 = (1..42).random()
+    val win2 = (1..42).random()
+    val win3 = (1..42).random()
 
     println("Введите первое число")
     val userNumber1 = readln().toInt()
@@ -20,7 +18,7 @@ fun main () {
     var matches = 0
 
     if (userNumber1 == win1 || userNumber1 == win2 || userNumber1 == win3) matches++
-    if (userNumber3 == win1 || userNumber2 == win2 || userNumber2 == win3) matches++
+    if (userNumber2 == win1 || userNumber2 == win2 || userNumber2 == win3) matches++
     if (userNumber3 == win1 || userNumber3 == win2 || userNumber3 == win3) matches++
 
     when (matches) {
