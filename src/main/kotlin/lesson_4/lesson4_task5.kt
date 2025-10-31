@@ -22,4 +22,4 @@ fun main() {
                         provisions >= MIN_PROVISIONS_ALT)
 
     println("Корабль может отправиться в плавание: $canDepart")
-}}
+}
