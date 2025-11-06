@@ -13,14 +13,12 @@ fun main () {
 
         if (userNumber == randomNumber) {
             println("Это была великолепная игра! Ты угадал число $randomNumber!")
-            break
-        } else {
-            attempts--
-            if (attempts > 0 && userNumber != randomNumber){
-                println("Неверно. Попробуй еще раз. У тебя осталось $attempts попыток")
-            } else {
-                println("Попытки закончились! Было загадано число: $randomNumber.")
-            }
+            return
+        }
+        attempts--
+        if (attempts > 0){
+            println("Неверно. Попробуй еще раз. У тебя осталось $attempts попыток")
         }
     }
+    println("Попытки закончились! Было загадано число: $randomNumber.")
 }
