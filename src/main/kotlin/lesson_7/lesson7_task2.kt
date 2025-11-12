@@ -2,19 +2,18 @@ package org.example.lesson_7
 
 fun main() {
 
-   for (attempt in 1..5) {
-       val codeDigits = (1000..9999).random()
-       println("Ваш код авторизации: $codeDigits")
+    val codeDigits = (1000..9999).random()
+    println("Ваш код авторизации: $codeDigits")
 
-       println("Введите код из СМС: ")
-       val userCode = readln()
+    println("Введите код из СМС: ")
 
-       if (userCode == codeDigits.toString()) {
-           println("Добро пожаловать!")
-           return
-       } else {
-           println("Неверный код.")
-       }
-       }
-    println("Попытки закончились. Доступ запрещён.")
-   }
+    for (i in 1..99999999) {
+        val userCode = readln().toInt()
+
+        if (userCode == codeDigits) {
+            println("Добро пожаловать!")
+            return
+        }
+        println("Неверный код. Введите код из СМС:")
+    }
+}
