@@ -2,16 +2,15 @@ package org.example.lesson_7
 
 fun main() {
 
-    val codeDigits = (1000..9999).random()
-    println("Ваш код авторизации: $codeDigits")
+    var codeDigits: Int
+    var userCode: Int
 
-     do {
-         println("Введите код из СМС: ")
-         val userCode = readln().toInt()
+    do {
+        codeDigits = (1000..9999).random()
+        println("Ваш код авторизации: $codeDigits")
+        println("Введите код из СМС: ")
+        userCode = readln().toInt()
 
-         if (userCode == codeDigits) {
-             println("Добро пожаловать!")
-             return
-         }
-     } while (userCode != codeDigits)
-    }
+    } while (userCode != codeDigits)
+    println("Добро пожаловать!")
+}
