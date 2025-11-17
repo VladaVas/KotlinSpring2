@@ -3,7 +3,7 @@ package org.example.lesson_7
 fun main() {
 
     val letters = 'a'..'z'
-    val digits = '1'..'9'
+    val digits = '0'..'9'
     val capitalLetters = 'A'..'Z'
     val allChars = letters + digits + capitalLetters
 
@@ -18,11 +18,16 @@ fun main() {
         }
     } while (passwordLength < 6)
 
-    var securePassword = ""
+    val securePassword = mutableListOf<Char>()
 
-    for (i in 1..passwordLength) {
+    securePassword.add(letters.random())
+    securePassword.add(capitalLetters.random())
+    securePassword.add(digits.random())
+
+    for (i in 4..passwordLength) {
         securePassword += allChars.random()
     }
-    println("Ваш пароль: $securePassword")
+    securePassword.shuffle()
+    println("Ваш пароль: ${securePassword.joinToString("")}")
 
 }
