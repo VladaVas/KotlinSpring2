@@ -2,7 +2,7 @@ package org.example.lesson_8
 
 fun main() {
 
-    val listOfIngridients = arrayListOf("творог", "рисовая мука", "яйцо", "ванилин", "сахар")
+    val listOfIngridients = arrayOf("творог", "рисовая мука", "яйцо", "ванилин", "сахар")
 
     println("Введите ингридет для поиска: ")
     val ingridientSearch = readln()
