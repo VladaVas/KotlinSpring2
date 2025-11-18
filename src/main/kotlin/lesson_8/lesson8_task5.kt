@@ -11,6 +11,6 @@ fun main() {
         println("Введите ингредиент №${i + 1}:")
         ingridients[i] = readln()
     }
-    println("Ваш список ингридиентов: ${ingridients.joinToString (", ")}")
+    println("Ваш список ингридиентов: ${ingridients.joinToString(", ")}")
 
 }
