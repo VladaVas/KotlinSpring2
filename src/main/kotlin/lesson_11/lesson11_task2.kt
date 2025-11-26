@@ -46,23 +46,22 @@ class User2(
     }
 }
 
-    fun main() {
+fun main() {
 
-        val userInfo = User2(
-            id = 1234567,
-            login = "User Userovich",
-            email = "userovich@mail.com",
-            password = "QwErTyUiOp",
-            bio = null
-        )
+    val userInfo = User2(
+        id = 1234567,
+        login = "User Userovich",
+        email = "userovich@mail.com",
+        password = "QwErTyUiOp",
+        bio = null
+    )
 
+    userInfo.printInfo()
+    println()
+    userInfo.printBio()
+    println()
+    userInfo.printInfo()
+    println()
+    userInfo.changePassword()
 
-        userInfo.printInfo()
-        println()
-        userInfo.printBio()
-        println()
-        userInfo.printInfo()
-        println()
-        userInfo.changePassword()
-
-    }
+}
