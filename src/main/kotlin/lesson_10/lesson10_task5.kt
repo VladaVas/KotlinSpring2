@@ -2,8 +2,9 @@ package org.example.lesson_10
 
 const val LOGIN = "user@login.com"
 const val PASSWORD = "A!1S@2D#3"
+const val TOKEN_LENGTH = 32
 
-fun generateToken(length: Int = 32): String {
+fun generateToken(length: Int = TOKEN_LENGTH): String {
 
     val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
     return (1..length)
