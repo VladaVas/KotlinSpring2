@@ -29,17 +29,17 @@ fun main() {
     println("Человек выиграл $playerWins партию(й)")
 }
 
-fun rollDice(): Int {
+fun rollDice1(): Int {
     return (1..6).random()
 }
 
 fun playRound(): Int {
     println("Игрок делает ход.")
-    val playerRoll = rollDice()
+    val playerRoll = rollDice1()
     println("Игрок выбросил $playerRoll")
 
     println("Компьютер делает ход.")
-    val compucterRoll = rollDice()
+    val compucterRoll = rollDice1()
     println("Компьютер выбросил $compucterRoll")
 
     return when {
