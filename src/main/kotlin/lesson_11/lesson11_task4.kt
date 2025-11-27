@@ -16,7 +16,7 @@ class Recipe(
     val portions: String,
     val ingridients: String,
     val steps: String,
-) {}
+)
 
 class Ingredient(
     val name: String,
