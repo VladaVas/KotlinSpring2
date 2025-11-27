@@ -20,9 +20,8 @@ class User2(
     }
 
     fun printBio() {
-        println("Введите информацию для записи в Bio: ")
-        val newBio = readln()
-        bio = newBio
+
+        bio = " Новое био"
         println("Bio обновлено.")
 
     }
