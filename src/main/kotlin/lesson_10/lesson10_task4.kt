@@ -35,11 +35,11 @@ fun rollDice1(): Int {
 
 fun playRound(): Int {
     println("Игрок делает ход.")
-    val playerRoll =  rollDice1()
+    val playerRoll = rollDice1()
     println("Игрок выбросил $playerRoll")
 
     println("Компьютер делает ход.")
-    val compucterRoll =  rollDice1()
+    val compucterRoll = rollDice1()
     println("Компьютер выбросил $compucterRoll")
 
     return when {
