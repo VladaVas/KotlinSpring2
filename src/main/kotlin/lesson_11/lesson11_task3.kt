@@ -10,11 +10,15 @@ class VoiceRoom(
     val cover: String,
     val title: String,
 ) {
-    val participants = mutableListOf<Participants>()
+    private val participants = mutableListOf<Participants>()
 
     fun addParticipants(participant: Participants) {
-        participants.add(participant)
-        println("Участник ${participant.nickname} добавлен в комнату.")
+
+        if (participants.add(participant)) {
+            println("Участник ${participant.nickname} добавлен в комнату.")
+        } else {
+            println("Участник ${participant.nickname} уже существует.")
+        }
     }
 
 
