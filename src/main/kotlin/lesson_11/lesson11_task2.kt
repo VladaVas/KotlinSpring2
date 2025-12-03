@@ -19,10 +19,8 @@ class User2(
 
     }
 
-    fun printBio() {
-
-        bio = " Новое био"
-        println("Bio обновлено.")
+    fun newBio(newBioText: String) {
+        bio = newBioText
 
     }
 
@@ -57,10 +55,12 @@ fun main() {
 
     userInfo.printInfo()
     println()
-    userInfo.printBio()
+
+    userInfo.newBio("Я люблю котиков и программирование!")
     println()
+
     userInfo.printInfo()
     println()
-    userInfo.changePassword()
 
+    userInfo.changePassword()
 }
