@@ -4,7 +4,7 @@ class Participants(
     val nickname: String,
     val avatar: String,
     var status: String,
-)
+) {}
 
 class VoiceRoom(
     val cover: String,
@@ -14,10 +14,12 @@ class VoiceRoom(
 
     fun addParticipants(participant: Participants) {
 
-        if (participants.add(participant)) {
-            println("Участник ${participant.nickname} добавлен в комнату.")
-        } else {
+        if (participants.any { it.nickname == participant.nickname }) {
             println("Участник ${participant.nickname} уже существует.")
+        } else {
+            participants.add(participant)
+            println("Участник ${participant.nickname} добавлен в комнату.")
+
         }
     }
 
