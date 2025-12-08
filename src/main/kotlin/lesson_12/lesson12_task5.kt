@@ -1,12 +1,10 @@
 package org.example.lesson_12
 
-import kotlin.random.Random
-
-const val differenceKelvin = 273
+const val DIFFERENCE_KELVIN = 273
 
 class DayWeatherKelvin(_dayTempKelvin: Int, _nightTempKelvin: Int, _hasPrecipitationKelvin: Boolean) {
-    var dayTempCelsius: Int  = _dayTempKelvin - differenceKelvin
-    var nightTempCelsius: Int = _nightTempKelvin - differenceKelvin
+    var dayTempCelsius: Int  = _dayTempKelvin - DIFFERENCE_KELVIN
+    var nightTempCelsius: Int = _nightTempKelvin - DIFFERENCE_KELVIN
     var hasPrecipitationCelsius: Boolean = _hasPrecipitationKelvin
 
     init {
@@ -20,9 +18,9 @@ fun main() {
 
     for (i in 1..30) {
         val today = DayWeatherKelvin(
-            Random.nextInt(260,310),
-            Random.nextInt(260,310),
-            Random.nextBoolean(),
+            (260..310).random(),
+            (260..310).random(),
+            listOf(true, false).random()
         )
         sensorData.add(today)
     }
