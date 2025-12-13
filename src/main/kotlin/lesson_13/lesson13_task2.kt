@@ -1,0 +1,18 @@
+package org.example.lesson_13
+
+class  Numberbook( val name: String, val phoneNumber: Long, val company: String? = null) {
+
+    fun userData() {
+        val unknownCompany = company ?: "<не указано>"
+        println("Имя: $name, номер: $phoneNumber, компания: $unknownCompany ")
+    }
+}
+
+fun main() {
+
+    val user1 = Numberbook("Сергей", 89123456789)
+    val user2 = Numberbook("Ирина", 89876543210, "Reddit")
+    user1.userData()
+    user2.userData()
+
+}
