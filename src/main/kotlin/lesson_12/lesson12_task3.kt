@@ -1,10 +1,10 @@
 package org.example.lesson_12
 
-const val DIFFERENCE_KELVIN: Int = 273
+const val DIFFERENCE_KELVIN1 = 273
 
 class DayWeatherKelvin1(_dayTempKelvin: Int, _nightTempKelvin: Int, _hasPrecipitationKelvin: Boolean) {
-    var dayTempCelsius: Int  = _dayTempKelvin - DIFFERENCE_KELVIN
-    var nightTempCelsius: Int = _nightTempKelvin - DIFFERENCE_KELVIN
+    var dayTempCelsius: Int  = _dayTempKelvin - DIFFERENCE_KELVIN1
+    var nightTempCelsius: Int = _nightTempKelvin - DIFFERENCE_KELVIN1
     var hasPrecipitationCelsius: Boolean = _hasPrecipitationKelvin
 
     fun printWeather () {
