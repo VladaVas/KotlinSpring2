@@ -10,19 +10,26 @@ class ContactEntry(val name: String, val phoneNumber: Long, val company: String?
 fun main() {
 
     val userInput = mutableListOf<ContactEntry>()
-    println("Введите имя: ")
-    val name = readLine() ?: ""
-    println("Введите номер телефона: ")
-    val phone = readLine()!!.toLongOrNull()
-    println("Введите название компании: ")
-    val companyInput = readLine()
-    val company = if (companyInput =="") null else companyInput
+    var continueInput = true
 
-    if (phone != null) {
-        userInput.add(ContactEntry(name, phone, company))
-    } else {
-        println("Номер телефона введён некорректно. Контакт не добавлен.")
+    while (continueInput) {
+
+        println("Введите имя: ")
+        val name = readLine() ?: ""
+
+        println("Введите номер телефона: ")
+        val phone = readLine()!!.toLongOrNull()
+
+        if (phone == null) {
+            println("Номер телефона введён некорректно. Контакт не добавлен.")
+        } else {
+            println("Введите название компании: ")
+            val companyInput = readLine()
+            val company = if (companyInput!!.isEmpty()) null else companyInput
+            userInput.add(ContactEntry(name, phone, company))
+        }
+
+        userInput.forEach { it.printData() }
+
     }
-    userInput.forEach { it.printData() }
-
 }
