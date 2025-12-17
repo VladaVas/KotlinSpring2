@@ -1,6 +1,6 @@
 package org.example.lesson_14
 
-abstract open class BaseVessel(
+abstract class BaseVessel(
     val name: String,
     open val speed: Int = 250,
     open val capacity: Int = 400,
