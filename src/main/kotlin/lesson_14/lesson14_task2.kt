@@ -9,15 +9,15 @@ abstract class BaseVessel(
 ) {
     abstract fun loadCargo()
     open fun printInfo() {
-println(
-    """
+        println(
+            """
         Корабль: $name,
         Скорость: $speed км/ч,
         Вместисомть: $capacity, 
         Грузоподъемность: $liftingCapacity,
         Может колоть лёд: $icebreakingAbility
     """.trimIndent()
-)
+        )
     }
 }
 
@@ -33,15 +33,16 @@ class PassengerLiner(
     liftingCapacity = liftingCapacity,
 ) {
     override fun loadCargo() {
-       println("Лайнер выдвигает горизонтальный трап со шкафута")
+        println("Лайнер выдвигает горизонтальный трап со шкафута")
     }
 }
+
 class CargoShipVessel(
     name: String,
     speed: Int = 150,
-    capacity: Int= 300,
+    capacity: Int = 300,
     liftingCapacity: Int = 400,
-): BaseVessel(
+) : BaseVessel(
     name = name,
     speed = speed,
     capacity = capacity,
@@ -58,7 +59,7 @@ class IcebreakerVessel(
     capacity: Int = 250,
     liftingCapacity: Int = 300,
     icebreakingAbility: Boolean = true,
-): BaseVessel(
+) : BaseVessel(
     name = name,
     speed = speed,
     capacity = capacity,
@@ -72,7 +73,7 @@ class IcebreakerVessel(
 
 fun main() {
 
-    val liner = PassengerLiner("Лайнер \"Анатолий\"",)
+    val liner = PassengerLiner("Лайнер \"Анатолий\"")
     val cargoship = CargoShipVessel("Грузовое судно \"Слон Вася\"")
     val icebreaker = IcebreakerVessel("Ледокол \"Мишка на севере\"")
 
