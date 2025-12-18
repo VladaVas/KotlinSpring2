@@ -1,6 +1,6 @@
 package org.example.lesson_14
 
-open class CelestialBodies(
+open class CelestialBody(
     open val atmosphere: Boolean,
     open val suitableForLanding: Boolean,
     val name: String,
@@ -14,13 +14,12 @@ class Planet(
     name: String,
     override val atmosphere: Boolean,
     override val suitableForLanding: Boolean,
-) : CelestialBodies(
+    val satelliteList: List<Satellite> = listOf(),
+) : CelestialBody(
     atmosphere = atmosphere,
     suitableForLanding = suitableForLanding,
     name = name
 ) {
-    val satelliteList: MutableList<Satellite> = mutableListOf()
-
     override fun printCelrstialBodies() {
         super.printCelrstialBodies()
         println("Спутники:")
@@ -32,7 +31,7 @@ class Satellite(
     name: String,
     atmosphere: Boolean,
     suitableForLanding: Boolean,
-) : CelestialBodies(
+) : CelestialBody(
     atmosphere = atmosphere,
     suitableForLanding = suitableForLanding,
     name = name,
@@ -40,11 +39,14 @@ class Satellite(
 
 fun main() {
 
-    val firstPlanet = Planet("Зелибоба", true, true)
     val firstSatellite = Satellite("Мишка гамми", false, false)
     val secondSatellite = Satellite("Лабуба", true, false)
+    val firstPlanet = Planet(
+        "Зелибоба",
+        true,
+        true,
+        satelliteList = listOf(firstSatellite, secondSatellite)
+    )
 
-    firstPlanet.satelliteList.add(firstSatellite)
-    firstPlanet.satelliteList.add(secondSatellite)
     firstPlanet.printCelrstialBodies()
 }
