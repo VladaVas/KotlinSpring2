@@ -1,6 +1,6 @@
 package org.example.lesson_14
 
-abstract class Liner(
+open class Liner(
     open val name: String,
     open val speed: Int = 250,
     open val capacity: Int = 400,
@@ -25,13 +25,15 @@ class Icebreaker(
     capacity = 250,
     liftingCapacity = 300,
     icebreakingAbility = true,
-    )
+)
 
 fun main() {
 
+    val liner = Liner("Лайнер \"Анатолий\"")
     val cargoship = Cargoship("Грузовое судно \"Слон Вася\"")
     val icebreaker = Icebreaker("Ледокол \"Мишка на севере\"")
 
+    println("Имя: ${liner.name}, Скорость: ${liner.speed} км/ч")
     println("Имя: ${cargoship.name}, Скорость: ${cargoship.speed} км/ч")
     println("Имя: ${icebreaker.name}, Скорость: ${icebreaker.speed} км/ч")
 }
