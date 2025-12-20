@@ -17,7 +17,7 @@ class ChildMessage(
     parentMessageID = parentMessageID,
     messageAutor = messageAutor,
     messageText = messageText,
-) {}
+)
 
 class Chat(
     val id: Int,
@@ -27,30 +27,27 @@ class Chat(
     var newtId = 1
 
     fun addMessage(messageAutor: String, textMessage: String) {
-
         val newMessage = Message(newtId, null, messageAutor, textMessage)
         messageList = messageList + newMessage
         newtId++
     }
-    fun addThreadMessage(parentMessageID: Int, messageAutor: String, textMessage: String,) {
 
+    fun addThreadMessage(parentMessageID: Int, messageAutor: String, textMessage: String,) {
         val newMessage = ChildMessage(newtId, parentMessageID, messageAutor, textMessage)
         messageList = messageList + newMessage
         newtId++
     }
-    fun printChat() {
 
+    fun printChat() {
         val chatGroup = messageList.groupBy { it.parentMessageID }
         chatGroup[null]?.forEach { message ->
             println("${message.messageAutor}: ${message.messageText}")
 
             chatGroup[message.id]?.forEach { child ->
-                println("    ${child.messageAutor}: ${child.messageText}")
-
+                println("\t${child.messageAutor}: ${child.messageText}")
             }
             println()
         }
-
     }
 }
 
