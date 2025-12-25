@@ -1,6 +1,6 @@
 package org.example.lesson_15
 
-abstract class WeatherStationStats()
+abstract class WeatherStationStats
 
 class Temperature(
     val temperature: Int,
@@ -13,20 +13,22 @@ class PrecipitationAmount(
 class WeatherServer {
 
     fun sendMessage(stats: WeatherStationStats) {
-        if (stats is Temperature) {
-            println("Temperature: ${stats.temperature}°C")
-        } else if (stats is PrecipitationAmount) {
-            println("Precipitation: ${stats.precipitationAmount}")
+        val message = when (stats) {
+            is Temperature -> "Temperature: ${stats.temperature}°C"
+            is PrecipitationAmount -> "Precipitation: ${stats.precipitationAmount}"
+            else -> "Неизвестный тип данных"
         }
+        println(message)
+        }
+        }
+
+
+    fun main() {
+        val server = WeatherServer()
+        val temperature = Temperature(10)
+        val precipitationAmount = PrecipitationAmount(16)
+
+        server.sendMessage(temperature)
+        server.sendMessage(precipitationAmount)
+
     }
-}
-
-fun main() {
-    val server = WeatherServer()
-    val temperature = Temperature(10)
-    val precipitationAmount = PrecipitationAmount(16)
-
-    server.sendMessage(temperature)
-    server.sendMessage(precipitationAmount)
-
-}
