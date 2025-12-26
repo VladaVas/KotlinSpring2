@@ -19,16 +19,14 @@ class WeatherServer {
             else -> "Неизвестный тип данных"
         }
         println(message)
-        }
-        }
-
-
-    fun main() {
-        val server = WeatherServer()
-        val temperature = Temperature(10)
-        val precipitationAmount = PrecipitationAmount(16)
-
-        server.sendMessage(temperature)
-        server.sendMessage(precipitationAmount)
-
     }
+}
+
+fun main() {
+    val server = WeatherServer()
+    val temperature = Temperature(10)
+    val precipitationAmount = PrecipitationAmount(16)
+
+    server.sendMessage(temperature)
+    server.sendMessage(precipitationAmount)
+}
