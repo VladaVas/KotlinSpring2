@@ -4,17 +4,16 @@ interface Searching {
     fun searching()
 }
 
-
-abstract class Prodacts(
+abstract class Prodact(
     val name: String,
     val amount: Int,
 )
 
-class Instrumets(
+class Instrumet(
     name: String,
     amount: Int,
-    private val accessories: List<Accessories>,
-) : Prodacts(
+    private val accessories: List<Accessorie>,
+) : Prodact(
     name = name,
     amount = amount,
 ), Searching {
@@ -24,11 +23,10 @@ class Instrumets(
     }
 }
 
-
-class Accessories(
+class Accessorie(
     name: String,
     amount: Int,
-) : Prodacts(
+) : Prodact(
     name = name,
     amount = amount,
 )
@@ -36,24 +34,24 @@ class Accessories(
 fun main() {
 
     val gitarAccessories = listOf(
-        Accessories("Комплекст струн для акустических гитар", 18),
-        Accessories("Медиатор", 116)
+        Accessorie("Комплекст струн для акустических гитар", 18),
+        Accessorie("Медиатор", 116)
     )
 
     val synthesizerAccessorues = listOf(
-        Accessories("Стойка для клавищных инструментов", 10),
-        Accessories("Пюптр", 8)
+        Accessorie("Стойка для клавищных инструментов", 10),
+        Accessorie("Пюптр", 8)
     )
 
     val violinAccessories = listOf(
-        Accessories("Смычок", 16),
-        Accessories("Канефоль", 3),
-        Accessories("Комплект струн для смычковых интрументов", 32)
+        Accessorie("Смычок", 16),
+        Accessorie("Канефоль", 3),
+        Accessorie("Комплект струн для смычковых интрументов", 32)
     )
 
-    val gitar = Instrumets("Гитара", 25, gitarAccessories)
-    val synthesizer = Instrumets("Синтезатор", 11, synthesizerAccessorues)
-    val violin = Instrumets("Скрипка", 16, violinAccessories)
+    val gitar = Instrumet("Гитара", 25, gitarAccessories)
+    val synthesizer = Instrumet("Синтезатор", 11, synthesizerAccessorues)
+    val violin = Instrumet("Скрипка", 16, violinAccessories)
 
     val instrumets = listOf(gitar, synthesizer, violin)
 
@@ -66,6 +64,4 @@ fun main() {
     } else {
         println("Инструмент $search не найден")
     }
-
-
 }
