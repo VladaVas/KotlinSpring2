@@ -1,54 +1,64 @@
 package org.example.lesson_15
 
-abstract class Roles(
+abstract class Role(
     val username: String,
 ) {
-    open fun readMessage() {
-        println("${username} is reading message")
+    abstract fun showActions()
+    fun readMessage() {
+        println("$username is reading message")
     }
 
-    fun writeMessage(message: String?) {
-        println("${username} is writing message")
-        println("${username}: $message")
+    fun writeMessage(message: String) {
+        println("$username is writing message")
+        println("$username: $message")
     }
 }
 
-class Users(
+class User(
     username: String,
-) : Roles(
-    username = username,
-)
-
-class Admins(
-    username: String,
-) : Roles(
+) : Role(
     username = username,
 ) {
-    fun deleteMessage(user: Users) {
-        println("${username} deletes the message from ${user.username}")
+    override fun showActions() {
+        println("$username can:")
+        println("- read message")
+        println("- write message")
+    }
+}
+
+class Admin(
+    username: String,
+) : Role(
+    username = username,
+) {
+    override fun showActions() {
+        println("$username can:")
+        println("- read message")
+        println("- write message")
+        println("- delete message")
+        println("- delete user")
     }
 
-    fun deleteUser(user: Users) {
-        println("${username} deletes the ${user.username}")
+    fun deleteMessage(user: User) {
+        println("$username deletes the message from ${user.username}")
+    }
+
+    fun deleteUser(user: User) {
+        println("$username deletes the ${user.username}")
     }
 }
 
 fun main() {
-    val user1 = Users("Ivan")
-    val user2 = Users("Kira")
-    val admin = Admins("Olga")
+    val user1 = User("Ivan")
+    val user2 = User("Kira")
+    val admin = Admin("Olga")
 
     user1.writeMessage("Hello, everyone!")
     println()
     user2.readMessage()
-    println()
     user2.writeMessage("Ivan look like potato")
     println()
     admin.readMessage()
-    println()
     admin.deleteMessage(user2)
-    println()
     admin.deleteUser(user2)
-
-
 }
