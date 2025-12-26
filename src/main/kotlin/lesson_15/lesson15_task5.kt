@@ -6,44 +6,43 @@ interface MovementActions {
 }
 
 interface ActionsWithPassanger {
-    fun passengerLoading()
-    fun passengerUnloading()
+    val currentPassengersAmount: Int
+    val maxPassengersAmount: Int
+    fun passengerLoading(count: Int)
+    fun passengerUnloading(count: Int)
 }
 
 interface ActionsWithCargo {
-    fun cargoLoading()
-    fun cargoUnloading()
+    val currentPassengersAmount: Int
+    val maxPassengersAmount: Int
+    val currentCargoAmout: Double
+    val maxCargoAmout: Double
+    fun cargoLoading(count: Double)
+    fun cargoUnloading(count: Double)
 }
 
-abstract class Vehicles(
+class Car(
     val name: String,
-    open val maxPassengersAmount: Int,
-    open val maxCargoAmout: Double,
-)
+    override val maxPassengersAmount: Int = 3,
+) : MovementActions, ActionsWithPassanger {
+    override var currentPassengersAmount = 0
 
-class Cars(
-    name: String,
-    maxPassengersAmount: Int = 3,
-) : Vehicles(
-    name = name,
-    maxPassengersAmount = maxPassengersAmount,
-    maxCargoAmout = 0.0,
-), MovementActions, ActionsWithPassanger {
-    private var currentPassengersAmount = 0
-
-    override fun passengerLoading() {
-        if (currentPassengersAmount < maxPassengersAmount) {
-            currentPassengersAmount++
-            println("$name: пассажир загружен ($currentPassengersAmount/$maxPassengersAmount)")
+    override fun passengerLoading(count: Int) {
+        val freeSeats = maxPassengersAmount - currentPassengersAmount
+        val toLoad = minOf(count, freeSeats)
+        if (toLoad > 0) {
+            currentPassengersAmount+= toLoad
+            println("$name: загружено пассажиров $toLoad ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name переполнен, добавлять новых пассажиров нельзя.")
         }
     }
 
-    override fun passengerUnloading() {
-        if (currentPassengersAmount > 0) {
-            currentPassengersAmount--
-            println("$name: пассажир выгружен ($currentPassengersAmount/$maxPassengersAmount)")
+    override fun passengerUnloading(count: Int) {
+        val toUnload = minOf(count, currentPassengersAmount)
+        if (toUnload> 0) {
+            currentPassengersAmount-= toUnload
+            println("$name: выгружено пассажиров $toUnload ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name: Нет пассажиров для выгрузки.")
         }
@@ -59,49 +58,52 @@ class Cars(
 }
 
 
-class Trucks(
-    name: String,
-    maxPassengersAmount: Int = 1,
-    maxCargoAmout: Double = 2.0,
-) : Vehicles(
-    name = name,
-    maxPassengersAmount = maxPassengersAmount,
-    maxCargoAmout = maxCargoAmout,
-), MovementActions, ActionsWithPassanger, ActionsWithCargo {
-    private var currentPassengerAmount = 0
-    private var currentCargoAmout = 0.0
+class Truck(
+    val name: String,
+    override val maxPassengersAmount: Int = 1,
+    override val maxCargoAmout: Double = 2.0,
+) : MovementActions, ActionsWithPassanger, ActionsWithCargo {
+    override var currentPassengersAmount = 0
+    override var currentCargoAmout = 0.0
 
-    override fun passengerLoading() {
-        if (currentPassengerAmount < maxPassengersAmount) {
-            currentPassengerAmount++
-            println("$name: пассажир загружен ($currentPassengerAmount/$maxPassengersAmount)")
+    override fun passengerLoading(count: Int) {
+        val freeSeats = maxPassengersAmount - currentPassengersAmount
+        val toLoad = minOf(count, freeSeats)
+        if (toLoad > 0) {
+            currentPassengersAmount+= toLoad
+            println("$name: загружено пассажиров $toLoad ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name переполнен, добавлять новых пассажиров нельзя.")
         }
     }
 
-    override fun passengerUnloading() {
-        if (currentPassengerAmount > 0) {
-            currentPassengerAmount--
-            println("$name: пассажир выгружен ($currentPassengerAmount/$maxPassengersAmount)")
+    override fun passengerUnloading(count: Int) {
+        val toUnload = minOf(count, currentPassengersAmount)
+        if (toUnload> 0) {
+            currentPassengersAmount-= toUnload
+            println("$name: выгружено пассажиров $toUnload ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name: Нет пассажиров для выгрузки.")
         }
     }
 
-    override fun cargoLoading() {
-        if (currentCargoAmout < maxCargoAmout) {
-            currentCargoAmout++
-            println("$name: груз загружен ($currentCargoAmout/$maxCargoAmout тонн)")
+    override fun cargoLoading(count: Double) {
+        val freeSpace = maxCargoAmout - currentCargoAmout
+        val toLoad = minOf(count, freeSpace)
+
+        if (toLoad > 0) {
+            currentCargoAmout+= toLoad
+            println("$name: загружено груза $toLoad т ($currentCargoAmout/$maxCargoAmout т)")
         } else {
             println("$name переполнен, добавлять груз больше нельзя.")
         }
     }
 
-    override fun cargoUnloading() {
-        if (currentCargoAmout > 0) {
-            currentCargoAmout--
-            println("$name: груз выгружен ($currentCargoAmout/$maxCargoAmout тонн)")
+    override fun cargoUnloading(count: Double) {
+        val toUnload = minOf(count, currentCargoAmout)
+        if (toUnload > 0) {
+            currentCargoAmout-= toUnload
+            println("$name: выгружено груза $toUnload т ($currentCargoAmout/$maxCargoAmout тонн)")
         } else {
             println("$name: Нет груза для выгрузки.")
         }
@@ -118,39 +120,29 @@ class Trucks(
 
 fun main() {
 
-    val car = Cars("Молния Маккуин", 3)
+    val car = Car("Молния Маккуин", 3)
+    val truck = Truck("Гэрри", 1, 2.0)
 
-    val truck = Trucks("Гэрри", 2, 2.0)
-
-    car.passengerLoading()
-    car.passengerLoading()
-    car.passengerLoading()
-    car.passengerLoading()
+    car.passengerLoading(3)
     car.vehicleMoving()
     car.vehicleStanding()
-    car.passengerUnloading()
-    car.passengerLoading()
+    car.passengerUnloading(1)
+    car.passengerLoading(1)
     car.vehicleMoving()
     car.vehicleStanding()
-    car.passengerUnloading()
-    car.passengerUnloading()
-    car.passengerUnloading()
-
-    truck.passengerLoading()
+    car.passengerUnloading(3)
+    println()
+    truck.passengerLoading(1)
+    truck.cargoLoading(1.0)
     truck.vehicleMoving()
     truck.vehicleStanding()
-    truck.cargoLoading()
+    truck.passengerUnloading(1)
+    truck.cargoLoading(1.0)
+    truck.passengerLoading(1)
     truck.vehicleMoving()
     truck.vehicleStanding()
-    truck.passengerUnloading()
-    truck.passengerLoading()
-    truck.cargoLoading()
-    truck.cargoLoading()
-    truck.vehicleMoving()
-    truck.vehicleStanding()
-    truck.passengerUnloading()
-    truck.cargoUnloading()
-    truck.cargoUnloading()
+    truck.passengerUnloading(1)
+    truck.cargoUnloading(2.0)
 }
 
 
