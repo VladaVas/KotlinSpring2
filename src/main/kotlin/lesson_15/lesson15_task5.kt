@@ -13,17 +13,15 @@ interface MovementActions {
 
 interface ActionsWithPassenger {
     val name: String
-    val currentPassengersAmount: Int
+    var currentPassengersAmount: Int
     val maxPassengersAmount: Int
-
-    fun changePassengers(delta: Int)
 
     fun passengerLoading(count: Int) {
         val freeSeats = maxPassengersAmount - currentPassengersAmount
         val toLoad = minOf(count, freeSeats)
 
         if (toLoad > 0) {
-            changePassengers(toLoad)
+            currentPassengersAmount += toLoad
             println("$name: загружено пассажиров $toLoad ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name переполнен, добавлять новых пассажиров нельзя.")
@@ -34,7 +32,7 @@ interface ActionsWithPassenger {
         val toUnload = minOf(count, currentPassengersAmount)
 
         if (toUnload > 0) {
-            changePassengers(-toUnload)
+            currentPassengersAmount -= toUnload
             println("$name: выгружено пассажиров $toUnload ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name: Нет пассажиров для выгрузки.")
@@ -44,17 +42,15 @@ interface ActionsWithPassenger {
 
 interface ActionsWithCargo {
     val name: String
-    val currentCargoAmount: Double
+    var currentCargoAmount: Double
     val maxCargoAmount: Double
-
-    fun changeCargo(delta: Double)
 
     fun cargoLoading(count: Double) {
         val freeSpace = maxCargoAmount - currentCargoAmount
         val toLoad = minOf(count, freeSpace)
 
         if (toLoad > 0) {
-            changeCargo(toLoad)
+            currentCargoAmount += toLoad
             println("$name: загружено груза $toLoad т ($currentCargoAmount/$maxCargoAmount т)")
         } else {
             println("$name переполнен, добавлять груз больше нельзя.")
@@ -64,7 +60,7 @@ interface ActionsWithCargo {
     fun cargoUnloading(count: Double) {
         val toUnload = minOf(count, currentCargoAmount)
         if (toUnload > 0) {
-            changeCargo(-toUnload)
+            currentCargoAmount -= toUnload
             println("$name: выгружено груза $toUnload т ($currentCargoAmount/$maxCargoAmount тонн)")
         } else {
             println("$name: Нет груза для выгрузки.")
@@ -74,34 +70,18 @@ interface ActionsWithCargo {
 
 class Car(
     override val name: String,
-    override val maxPassengersAmount: Int = 3,
+    override val maxPassengersAmount: Int,
 ) : MovementActions, ActionsWithPassenger {
     override var currentPassengersAmount = 0
-        private set
-
-    override fun changePassengers(delta: Int) {
-        currentPassengersAmount += delta
-    }
 }
 
 class Truck(
     override val name: String,
-    override val maxPassengersAmount: Int = 1,
+    override val maxPassengersAmount: Int,
     override val maxCargoAmount: Double = 2.0,
 ) : MovementActions, ActionsWithPassenger, ActionsWithCargo {
     override var currentPassengersAmount = 0
-        private set
-
     override var currentCargoAmount = 0.0
-        private set
-
-    override fun changePassengers(delta: Int) {
-        currentPassengersAmount += delta
-    }
-
-    override fun changeCargo(delta: Double) {
-        currentCargoAmount += delta
-    }
 }
 
 fun main() {
@@ -130,6 +110,4 @@ fun main() {
     truck.passengerUnloading(1)
     truck.cargoUnloading(2.0)
 }
-
-
 
