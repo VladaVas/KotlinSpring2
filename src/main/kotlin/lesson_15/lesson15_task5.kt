@@ -1,120 +1,106 @@
 package org.example.lesson_15
 
 interface MovementActions {
-    fun vehicleMoving()
-    fun vehicleStanding()
-}
-
-interface ActionsWithPassanger {
-    val currentPassengersAmount: Int
-    val maxPassengersAmount: Int
-    fun passengerLoading(count: Int)
-    fun passengerUnloading(count: Int)
-}
-
-interface ActionsWithCargo {
-    val currentPassengersAmount: Int
-    val maxPassengersAmount: Int
-    val currentCargoAmout: Double
-    val maxCargoAmout: Double
-    fun cargoLoading(count: Double)
-    fun cargoUnloading(count: Double)
-}
-
-class Car(
-    val name: String,
-    override val maxPassengersAmount: Int = 3,
-) : MovementActions, ActionsWithPassanger {
-    override var currentPassengersAmount = 0
-
-    override fun passengerLoading(count: Int) {
-        val freeSeats = maxPassengersAmount - currentPassengersAmount
-        val toLoad = minOf(count, freeSeats)
-        if (toLoad > 0) {
-            currentPassengersAmount+= toLoad
-            println("$name: загружено пассажиров $toLoad ($currentPassengersAmount/$maxPassengersAmount)")
-        } else {
-            println("$name переполнен, добавлять новых пассажиров нельзя.")
-        }
-    }
-
-    override fun passengerUnloading(count: Int) {
-        val toUnload = minOf(count, currentPassengersAmount)
-        if (toUnload> 0) {
-            currentPassengersAmount-= toUnload
-            println("$name: выгружено пассажиров $toUnload ($currentPassengersAmount/$maxPassengersAmount)")
-        } else {
-            println("$name: Нет пассажиров для выгрузки.")
-        }
-    }
-
-    override fun vehicleMoving() {
+    val name: String
+    fun vehicleMoving() {
         println("$name едет")
     }
 
-    override fun vehicleStanding() {
+    fun vehicleStanding() {
         println("$name остановился")
     }
 }
 
+interface ActionsWithPassenger {
+    val name: String
+    val currentPassengersAmount: Int
+    val maxPassengersAmount: Int
 
-class Truck(
-    val name: String,
-    override val maxPassengersAmount: Int = 1,
-    override val maxCargoAmout: Double = 2.0,
-) : MovementActions, ActionsWithPassanger, ActionsWithCargo {
-    override var currentPassengersAmount = 0
-    override var currentCargoAmout = 0.0
+    fun changePassengers(delta: Int)
 
-    override fun passengerLoading(count: Int) {
+    fun passengerLoading(count: Int) {
         val freeSeats = maxPassengersAmount - currentPassengersAmount
         val toLoad = minOf(count, freeSeats)
+
         if (toLoad > 0) {
-            currentPassengersAmount+= toLoad
+            changePassengers(toLoad)
             println("$name: загружено пассажиров $toLoad ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name переполнен, добавлять новых пассажиров нельзя.")
         }
     }
 
-    override fun passengerUnloading(count: Int) {
+    fun passengerUnloading(count: Int) {
         val toUnload = minOf(count, currentPassengersAmount)
-        if (toUnload> 0) {
-            currentPassengersAmount-= toUnload
+
+        if (toUnload > 0) {
+            changePassengers(-toUnload)
             println("$name: выгружено пассажиров $toUnload ($currentPassengersAmount/$maxPassengersAmount)")
         } else {
             println("$name: Нет пассажиров для выгрузки.")
         }
     }
+}
 
-    override fun cargoLoading(count: Double) {
-        val freeSpace = maxCargoAmout - currentCargoAmout
+interface ActionsWithCargo {
+    val name: String
+    val currentCargoAmount: Double
+    val maxCargoAmount: Double
+
+    fun changeCargo(delta: Double)
+
+    fun cargoLoading(count: Double) {
+        val freeSpace = maxCargoAmount - currentCargoAmount
         val toLoad = minOf(count, freeSpace)
 
         if (toLoad > 0) {
-            currentCargoAmout+= toLoad
-            println("$name: загружено груза $toLoad т ($currentCargoAmout/$maxCargoAmout т)")
+            changeCargo(toLoad)
+            println("$name: загружено груза $toLoad т ($currentCargoAmount/$maxCargoAmount т)")
         } else {
             println("$name переполнен, добавлять груз больше нельзя.")
         }
     }
 
-    override fun cargoUnloading(count: Double) {
-        val toUnload = minOf(count, currentCargoAmout)
+    fun cargoUnloading(count: Double) {
+        val toUnload = minOf(count, currentCargoAmount)
         if (toUnload > 0) {
-            currentCargoAmout-= toUnload
-            println("$name: выгружено груза $toUnload т ($currentCargoAmout/$maxCargoAmout тонн)")
+            changeCargo(-toUnload)
+            println("$name: выгружено груза $toUnload т ($currentCargoAmount/$maxCargoAmount тонн)")
         } else {
             println("$name: Нет груза для выгрузки.")
         }
     }
+}
 
-    override fun vehicleMoving() {
-        println("$name едет")
+class Car(
+    override val name: String,
+    override val maxPassengersAmount: Int = 3,
+) : MovementActions, ActionsWithPassenger {
+    override var currentPassengersAmount = 0
+        private set
+
+    override fun changePassengers(delta: Int) {
+        currentPassengersAmount += delta
+    }
+}
+
+class Truck(
+    override val name: String,
+    override val maxPassengersAmount: Int = 1,
+    override val maxCargoAmount: Double = 2.0,
+) : MovementActions, ActionsWithPassenger, ActionsWithCargo {
+    override var currentPassengersAmount = 0
+        private set
+
+    override var currentCargoAmount = 0.0
+        private set
+
+    override fun changePassengers(delta: Int) {
+        currentPassengersAmount += delta
     }
 
-    override fun vehicleStanding() {
-        println("$name остановился")
+    override fun changeCargo(delta: Double) {
+        currentCargoAmount += delta
     }
 }
 
@@ -144,5 +130,6 @@ fun main() {
     truck.passengerUnloading(1)
     truck.cargoUnloading(2.0)
 }
+
 
 
