@@ -5,7 +5,6 @@ class Dice {
     private val diceValue: Int = (1..6).random()
 
     fun printValue() {
-
         println("На кубике выпало число: $diceValue")
     }
 }
