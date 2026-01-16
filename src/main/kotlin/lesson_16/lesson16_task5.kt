@@ -4,20 +4,23 @@ class Gamer(
     val name: String,
     private var health: Int,
     private var impact: Int,
+    private var isAlive: Boolean = true,
 ) {
     fun damage(amount: Int) {
+        if (!isAlive) return
         health -= amount
         if (health <= 0) death()
     }
 
     fun healing(amount: Int) {
-
-        if (health != 0) health += amount
+        if (!isAlive) return
+        health += amount
     }
 
     private fun death() {
         impact = 0
         health = 0
+        isAlive = false
         println("Игрок умер.")
     }
 }
