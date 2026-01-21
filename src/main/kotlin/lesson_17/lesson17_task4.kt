@@ -1,33 +1,32 @@
 package org.example.lesson_17
 
-class Parsel(
+class Package(
     val number: Int,
     location: String,
-    var moveCount: Int = 0,
 ) {
-
+    var moveCount: Int = 0
     var location = location
         set(value) {
             field = value
-            moveCount += 1
+            moveCount++
         }
 }
 
 fun main() {
 
-    val parsel = Parsel(2115, "Moscow")
+    val packege = Package(2115, "Moscow")
 
-    println("Parsel information: \n number: ${parsel.number} \n location: ${parsel.location} \n number of movement: ${parsel.moveCount}")
-    parsel.location = "Moscow Sort Center"
+    println("Parsel information: \n number: ${packege.number} \n location: ${packege.location} \n number of movement: ${packege.moveCount}")
+    packege.location = "Moscow Sort Center"
     println()
-    println("Parsel information: \n number: ${parsel.number} \n location: ${parsel.location} \n number of movement: ${parsel.moveCount}")
+    println("Parsel information: \n number: ${packege.number} \n location: ${packege.location} \n number of movement: ${packege.moveCount}")
     println()
-    parsel.location = "Saint-Petersburg"
-    println("Parsel information: \n number: ${parsel.number} \n location: ${parsel.location} \n number of movement: ${parsel.moveCount}")
+    packege.location = "Saint-Petersburg"
+    println("Parsel information: \n number: ${packege.number} \n location: ${packege.location} \n number of movement: ${packege.moveCount}")
     println()
-    parsel.location = "Saint-Petersburg Sort Center"
-    println("Parsel information: \n number: ${parsel.number} \n location: ${parsel.location} \n number of movement: ${parsel.moveCount}")
+    packege.location = "Saint-Petersburg Sort Center"
+    println("Parsel information: \n number: ${packege.number} \n location: ${packege.location} \n number of movement: ${packege.moveCount}")
     println()
-    parsel.location = "Pick-up point"
-    println("Parsel information: \n number: ${parsel.number} \n location: ${parsel.location} \n number of movement: ${parsel.moveCount}")
+    packege.location = "Pick-up point"
+    println("Parsel information: \n number: ${packege.number} \n location: ${packege.location} \n number of movement: ${packege.moveCount}")
 }
