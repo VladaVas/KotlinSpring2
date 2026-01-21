@@ -1,11 +1,10 @@
 package org.example.lesson_17
 
-class UserDataLP(
+class User(
     login: String,
     password: String,
 ) {
-
-    var password = password
+    var password : String = password
         get() = "*".repeat(field.length)
         set(value) {
             println("You can't change the password")
@@ -20,7 +19,7 @@ class UserDataLP(
 
 fun main() {
 
-    val userData = UserDataLP("pesik.pesik@pesik.gaf", "153kfkdks3929")
+    val userData = User("pesik.pesik@pesik.gaf", "153kfkdks3929")
 
     println("User data: \n login: ${userData.login} \n password: ${userData.password}")
     println()
