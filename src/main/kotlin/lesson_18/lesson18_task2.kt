@@ -35,7 +35,7 @@ fun main() {
     val dice6 = Dice6()
     val dice8 = Dice8()
 
-    val diceList : List<Dice> = listOf(dice4, dice6, dice8)
+    val diceList: List<Dice> = listOf(dice4, dice6, dice8)
 
     for (dice in diceList) {
         dice.roll()
