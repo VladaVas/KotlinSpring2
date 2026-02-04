@@ -1,13 +1,12 @@
 package org.example.lesson_20
 
 class Player1(
-    val name: String,
     var key: Boolean,
 )
 
 fun main() {
 
-    val player1 = Player1("Julie", false)
+    val player1 = Player1( false)
 
     val findKey: (Player1) -> String = { player ->
         if (player.key) {
