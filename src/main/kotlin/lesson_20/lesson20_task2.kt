@@ -1,4 +1,4 @@
-package org.example
+package org.example.lesson_20
 
 class Player(
     val name: String,
