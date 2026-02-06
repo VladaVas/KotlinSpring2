@@ -10,7 +10,7 @@ class Robot(
     )
 ) {
 
-    private var modifier: ((String) -> String)? = null
+    private var modifier: ((String) -> String)? = { it }
 
     fun say() {
         val phrase = phrases.random()
