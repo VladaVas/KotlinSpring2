@@ -1,7 +1,7 @@
 package org.example.lesson_21
 
 fun Map<String, Int>.maxCategory(): String? {
-    val maxValue = this.values.maxOrNull() ?: return null
+    val maxValue = this.values.maxByOrNull{ it } ?: return null
     return this.entries.firstOrNull { it.value == maxValue }?.key
 }
 
